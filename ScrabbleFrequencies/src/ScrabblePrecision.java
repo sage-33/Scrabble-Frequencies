@@ -4,9 +4,12 @@ public class ScrabblePrecision extends TextFileAccessor {
 	// TODO: declare variables
 	private final int[] SCRABBLE_SCORES = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4,
 			10 };
+	int[] frequency = new int[26];
 	String str;
 	int ASCII_CODE_a = 97;
 	int[] letterCounts;
+	int totChCount = 0;
+	int endNum;
 
 	public ScrabblePrecision(String filename) throws IOException {
 		openFile(filename);
@@ -17,6 +20,11 @@ public class ScrabblePrecision extends TextFileAccessor {
 	@Override
 	protected void processLine(String curLine) {
 		// TODO: process each character from the current line
+		char[] curLineChars = curLine.toCharArray();
+		for (int i = 0; i < curLine.length(); i++) {
+			frequency[curLineChars[i] - ASCII_CODE_a]++;
+			totChCount++;
+		}
 
 	}
 
@@ -43,15 +51,10 @@ public class ScrabblePrecision extends TextFileAccessor {
 	private double getOnesAverage() {
 		// TODO: helper method to return the average frequency value in the supplied
 		// text for the letters that have Scrabble score 1
-
-		// THE PLAN
-		// can have an array of 25 0's and every time an index is repeated then that
-		// number at that index then goes up by 1
-		// and at the same time every time a character is read a total character holder
-		// number goes up too and at the end the new numbers are divided by total
-		// character and set equal to their letters
-
-		return 0.0;
+		for (int i = 0; i < frequency.length; i++) {
+			endNum = (frequency[i]) / totChCount;
+		}
+		return endNum;
 	}
 
 	@Override
