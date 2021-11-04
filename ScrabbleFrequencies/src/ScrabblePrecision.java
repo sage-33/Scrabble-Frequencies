@@ -4,62 +4,52 @@ public class ScrabblePrecision extends TextFileAccessor {
 	// TODO: declare variables
 	private final int[] SCRABBLE_SCORES = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4,
 			10 };
-	int[] frequency = new int[26];
-	String str;
-	int ASCII_CODE_a = 97;
-	int[] letterCounts;
-	int totChCount = 0;
-	int endNum;
+	private final int ASCII_CODE_a = 97;
+	private int[] frequency;
+	private int numOnes;
 
 	public ScrabblePrecision(String filename) throws IOException {
 		openFile(filename);
-		// TODO: initialize variables in constructor
+		numOnes = 0;
+		frequency = new int[26];
 
 	}
 
 	@Override
 	protected void processLine(String curLine) {
 		// TODO: process each character from the current line
-		char[] curLineChars = curLine.toCharArray();
+		char[] curLineChars = curLine.toLowerCase().toCharArray();
 		for (int i = 0; i < curLine.length(); i++) {
-			frequency[curLineChars[i] - ASCII_CODE_a]++;
-			totChCount++;
-		}
-
-	}
-
-	private int getLetterPos(char ch) {
-		// TODO: helper method to return the position for the character
-		// if (SCRABBLE_SCORES[n].equalsIgnoreCase()) {
-		for (int n = 0; n < SCRABBLE_SCORES.length; n++) {
-			for (int i = 0; i < SCRABBLE_SCORES.length; i++) {
-				char ch1 = str.charAt(i);
-				if (Character.isLetter(ch1)) {
-					// return ch - 97;
-					int letterIndex = ch1 - ASCII_CODE_a; // will take a lowercase letter and convert it to a number
-															// 0-25
-					letterCounts[letterIndex]++;
+			if (Character.isLetter(i)) {
+				int letterIndex = getLetterPos(curLineChars[i]);
+				frequency[letterIndex]++;
+				if (SCRABBLE_SCORES[letterIndex] == 1) {
+					numOnes++;
 
 				}
 
 			}
 		}
-		return 0;
 
+	}
+
+	private int getLetterPos(char ch) {
+		return ch - ASCII_CODE_a;
 	}
 
 	private double getOnesAverage() {
 		// TODO: helper method to return the average frequency value in the supplied
 		// text for the letters that have Scrabble score 1
-		for (int i = 0; i < frequency.length; i++) {
-			endNum = (frequency[i]) / totChCount;
-		}
-		return endNum;
+		return (double) numOnes / 10;
 	}
 
 	@Override
 	public void printReport() {
 		// TODO: prints the table of relative frequencies given the text file
+		for (int i = 0; i < 26; i++) {
+			System.out.printf("a");
+			System.out.printf("%-5.2d%n", i);
+		}
 	}
 
 }
