@@ -1,5 +1,12 @@
 import java.util.Scanner;
 
+/**
+ * If given a text file, run Scrabble Precisions and calculate the distributions
+ * of letters in said file.
+ * 
+ * @author sagesilberman
+ *
+ */
 public class ScrabbleDriver {
 	public static void main(String args[]) {
 		try {
